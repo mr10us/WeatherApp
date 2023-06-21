@@ -31,8 +31,11 @@ export const weatherSlice = createSlice({
       if (existingIndex === -1) {
         state.cities.push(action.payload);
       } else {
-        state.cities[existingIndex] =  {...state.cities[existingIndex], ...action.payload}
-      };
+        state.cities[existingIndex] = {
+          ...state.cities[existingIndex],
+          ...action.payload,
+        };
+      }
     },
     weatherFetchingError(state, action: PayloadAction<string>) {
       state.isLoaded = true;

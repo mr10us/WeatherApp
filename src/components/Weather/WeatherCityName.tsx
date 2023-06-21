@@ -10,7 +10,7 @@ type CityName = {
 const WeatherCityName: FC<CityName> = ({cityName}) => {
   return (
     <View style={styles.weatherCityName}>
-      <Icon name="location-arrow" size={20} style={styles.icon} />
+      <Icon name="location-arrow" size={20} style={styles.icon} color={PRIMARY_CL.color} />
       <Text style={styles.weatherCityText}>{cityName}</Text>
     </View>
   );
@@ -20,8 +20,6 @@ export default WeatherCityName;
 
 const styles = StyleSheet.create({
   weatherCityName: {
-    borderColor: 'green',
-    borderWidth: 2,
     height: '10%',
     display: 'flex',
     flexDirection: 'row',

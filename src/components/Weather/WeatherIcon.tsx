@@ -2,7 +2,6 @@ import {FC} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import {useAppSelector} from '../../hooks';
 import {selectIcon} from '../../store/reducers/WeatherSlice';
-import { BOX_WHITE_SHADOW } from '../../styles';
 
 interface WeatherIconProps {
   arrayIndex: number;
@@ -25,8 +24,6 @@ export default WeatherIcon;
 const styles = StyleSheet.create({
   weatherIconContainer: {
     width: '100%',
-    borderColor: 'purple',
-    borderWidth: 2,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'

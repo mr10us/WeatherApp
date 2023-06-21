@@ -1,5 +1,6 @@
 import {FC} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import { PRIMARY_CL } from '../../styles';
 
 interface WeatherTempProps {
   temp: number;
@@ -17,11 +18,11 @@ const WeatherTemp: FC<WeatherTempProps> = ({
   return (
     <View style={styles.weatherTempContainer}>
       <Text style={styles.weatherTemp}>
-        {Math.round(temp)}&#176; <Text style={styles.weatherTempWeather}>{weather}</Text>
+        {Math.floor(temp)}&#176; <Text style={styles.weatherTempWeather}>{weather}</Text>
       </Text>
       <View style={styles.weatherTempBetween}>
-        <Text>Max.temp.:{tempMax}</Text>
-        <Text>Min.temp.:{tempMin}</Text>
+        <Text style={styles.minmaxTemp}>Max.:{Math.floor(tempMax)}</Text>
+        <Text style={styles.minmaxTemp}>Min.:{Math.floor(tempMin)}</Text>
       </View>
     </View>
   );
@@ -30,8 +31,6 @@ export default WeatherTemp;
 
 const styles = StyleSheet.create({
   weatherTempContainer: {
-    borderColor: 'black',
-    borderWidth: 2,
     height: '40%',
     display: 'flex',
     justifyContent: 'center',
@@ -39,17 +38,17 @@ const styles = StyleSheet.create({
   },
   weatherTemp: {
     fontSize: 110,
-    color: '#656565',
-    borderColor: 'black',
-    borderWidth: 2,
+    ...PRIMARY_CL,
   },
   weatherTempBetween: {
     display: 'flex',
     flexDirection: 'row',
-    width: '70%',
+    width: '60%',
     justifyContent: 'space-between',
-    borderColor: 'black',
-    borderWidth: 2,
+  },
+  minmaxTemp: {
+    ...PRIMARY_CL,
+    fontSize: 24
   },
   weatherTempWeather: {
     fontSize: 40,

@@ -32,8 +32,6 @@ export default WeatherInfo;
 
 const styles = StyleSheet.create({
   weatherInfo: {
-    borderColor: 'yellow',
-    borderWidth: 2,
     height: '90%',
   },
 });

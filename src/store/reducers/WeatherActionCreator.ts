@@ -9,7 +9,7 @@ export const fetchWeatherByCity =
     try {
       dispatch(weatherSlice.actions.weatherFetching());
       const response = await axios.get<ICityWeather>(
-        `https://api.openweathermap.org/data/2.5/forecast?appid=${process.env.API_KEY}&q=${cityName}&lang=RU&cnt=${cnt}&units=metric`,
+        `https://api.openweathermap.org/data/2.5/forecast?appid=${process.env.API_KEY}&q=${cityName}&cnt=${cnt}&units=metric`,
       );
 
       const weather: ICityWeather = parseData(response.data);
@@ -26,7 +26,7 @@ export const fetchWeatherByCords =
     try {
       dispatch(weatherSlice.actions.weatherFetching());
       const response = await axios.get<ICityWeather>(
-        `https://api.openweathermap.org/data/2.5/forecast?appid=${process.env.API_KEY}&lat=${loc[0]}&lon=${loc[1]}&lang=RU&cnt=${cnt}&units=metric`,
+        `https://api.openweathermap.org/data/2.5/forecast?appid=${process.env.API_KEY}&lat=${loc[0]}&lon=${loc[1]}&cnt=${cnt}&units=metric`,
       );
 
       const weather: ICityWeather = parseData(response.data);

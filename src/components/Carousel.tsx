@@ -1,6 +1,5 @@
 import {FC, useState} from 'react';
 import {
-  Dimensions,
   NativeScrollEvent,
   SafeAreaView,
   ScrollView,
@@ -8,10 +7,10 @@ import {
   Text,
   View,
 } from 'react-native';
-import WeatherCard from './WeatherCard/WeatherCard';
+import WeatherCard from './Weather/WeatherCard';
 import {ICityWeather} from '../interfaces/ICityWeather';
-
-const WIDTH = Dimensions.get('window').width;
+import AddCityWeatherCard from './Weather/AddCityWeatherCard';
+import {WIDTH} from '../consts';
 
 const Carousel: FC<{elements: ICityWeather[]}> = ({elements}) => {
   const [imgActive, setImgActive] = useState(0);
@@ -36,7 +35,9 @@ const Carousel: FC<{elements: ICityWeather[]}> = ({elements}) => {
           pagingEnabled
           horizontal
           scrollEventThrottle={16}
+          contentOffset={{x: WIDTH, y: 0}}
           style={styles.wrap}>
+          <AddCityWeatherCard />
           {elements.map((elem, index) => (
             <WeatherCard
               key={index}
@@ -48,11 +49,14 @@ const Carousel: FC<{elements: ICityWeather[]}> = ({elements}) => {
           ))}
         </ScrollView>
         <View style={styles.wrapDot}>
+          <Text key={0} style={imgActive == 0 ? styles.dotActive : styles.dot}>
+            •
+          </Text>
           {elements.map((_, index) => (
             <Text
-              key={index}
-              style={imgActive == index ? styles.dotActive : styles.dot}>
-              ⦿
+              key={index + 1}
+              style={imgActive == index + 1 ? styles.dotActive : styles.dot}>
+              •
             </Text>
           ))}
         </View>
@@ -63,23 +67,26 @@ const Carousel: FC<{elements: ICityWeather[]}> = ({elements}) => {
 export default Carousel;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '70%',
   },
   wrap: {
     width: WIDTH,
+    backgroundColor: 'transparent',
   },
   wrapDot: {
     position: 'absolute',
-    bottom: 0,
+    bottom: -20,
     flexDirection: 'row',
     alignSelf: 'center',
   },
   dotActive: {
-    margin: 3,
-    color: 'black',
+    margin: 7,
+    color: 'white',
+    transform: [{scale: 4}],
   },
   dot: {
-    margin: 3,
-    color: 'white',
+    margin: 7,
+    color: 'rgba(0, 0, 0, 0.2)',
+    transform: [{scale: 4}],
   },
 });

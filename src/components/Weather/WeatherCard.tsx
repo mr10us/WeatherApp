@@ -1,7 +1,8 @@
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import WeatherInfo from './WeatherInfo';
 import {FC} from 'react';
 import WeatherCityName from './WeatherCityName';
+import WeatherContainer from './WeatherContainer';
 
 type WeatherCardData = {
   cityName: string;
@@ -15,8 +16,6 @@ type WeatherCardData = {
   index: number;
 };
 
-const WIDTH = Dimensions.get('window').width;
-
 const WeatherCard: FC<WeatherCardData> = ({
   cityName,
   weather,
@@ -24,16 +23,18 @@ const WeatherCard: FC<WeatherCardData> = ({
   index,
 }) => {
   return (
-    <View style={styles.weatherCard}>
-      <WeatherCityName cityName={cityName} />
-      <WeatherInfo
-        index={index}
-        temp={temperature.temp}
-        tempMax={temperature.temp_max}
-        tempMin={temperature.temp_min}
-        weather={weather}
-      />
-    </View>
+    <WeatherContainer>
+      <View style={styles.weatherCard}>
+        <WeatherCityName cityName={cityName} />
+        <WeatherInfo
+          index={index}
+          temp={temperature.temp}
+          tempMax={temperature.temp_max}
+          tempMin={temperature.temp_min}
+          weather={weather}
+        />
+      </View>
+    </WeatherContainer>
   );
 };
 
@@ -41,6 +42,7 @@ export default WeatherCard;
 
 const styles = StyleSheet.create({
   weatherCard: {
-    width: WIDTH-15,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    borderRadius: 25
   },
 });

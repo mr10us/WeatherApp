@@ -20,6 +20,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -22,16 +22,16 @@ export const CONTAINER = {
   marginHorizontal: 10,
 };
 export const PRIMARY_CL = {
-  color: '#4F4F4F',
+  color: '#FFFFFF',
 };
 export const SECONDARY_CL = {
-  color: '#4F4F4F',
+  color: '#C0C0C0',
 };
 export const PRIMARY_BG_CL_ONE = {
-  backgroundColor: '#6EFAE6',
+  backgroundColor: '#3a6ea5',
 };
 export const PRIMARY_BG_CL_TWO = {
-  backgroundColor: '#72EFED',
+  backgroundColor: '#004e98',
 };
 export const DEFAULT_SIZE = {
   fontSize: 16
