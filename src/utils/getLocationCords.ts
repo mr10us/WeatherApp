@@ -1,19 +1,15 @@
-import Geolocation, { GeolocationResponse } from "@react-native-community/geolocation";
+import axios, {AxiosError, AxiosResponse} from 'axios';
 
-/**
- *
- * @returns Latitude - Array[0], Longitude – Array[1]
- */
+export default async function getLocationCords(input: string) {
+  const formattedInput = input.toLowerCase();
 
-async function getLocationCords(): Promise<[number, number]> {
   try {
-    const info: GeolocationResponse = await new Promise((resolve, reject) => {
-      Geolocation.getCurrentPosition(resolve, reject);
-    });
-    return [info.coords.latitude, info.coords.longitude];
-  } catch (error: any) {
-    throw new Error(error.message);
+    const response: AxiosResponse = await axios.get(
+      `https://api.openweathermap.org/geo/1.0/direct?q=${formattedInput}&limit=5&appid=${process.env.API_KEY}`,
+    );
+
+    return response.data;
+  } catch (error: AxiosError) {
+    throw new Error(error);
   }
 }
-
-export default getLocationCords;

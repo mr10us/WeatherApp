@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import WeatherCard from './Weather/WeatherCard';
 import {ICityWeather} from '../interfaces/ICityWeather';
-import AddCityWeatherCard from './Weather/AddCityWeatherCard';
+import AddCityWeatherCard from './AddCityWeather/AddCityWeatherCard';
 import {WIDTH} from '../consts';
 
 const Carousel: FC<{elements: ICityWeather[]}> = ({elements}) => {

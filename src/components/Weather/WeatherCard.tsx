@@ -42,7 +42,7 @@ export default WeatherCard;
 
 const styles = StyleSheet.create({
   weatherCard: {
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 25
   },
 });

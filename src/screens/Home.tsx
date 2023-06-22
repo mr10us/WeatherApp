@@ -6,7 +6,7 @@ import {
   fetchWeatherByCity,
   fetchWeatherByCords,
 } from '../store/reducers/WeatherActionCreator';
-import getLocationCords from '../utils/getLocationCords';
+import getCurrentLocationCords from '../utils/getCurrentLocationCords';
 import Carousel from '../components/Carousel';
 import Loader from '../components/Loader';
 import Container from '../components/Container';
@@ -19,25 +19,27 @@ const Home: FC = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    getLocationCords()
+    getCurrentLocationCords()
       .then(loc => {
         dispatch(fetchWeatherByCords(loc, 1));
         setRefreshing(false);
+        console.log('onRefreshFetching')
       })
       .catch(error => {
-        console.error(error);
         setRefreshing(false);
       });
   }, [dispatch]);
 
   useEffect(() => {
-    getLocationCords()
-      .then(loc => {
-        dispatch(fetchWeatherByCords(loc, 1));
-        dispatch(fetchWeatherByCity('London', 1));
-      })
-      .catch(error => console.error(error));
-  }, [dispatch]);
+    if (data)
+      getCurrentLocationCords()
+        .then(loc => {
+          dispatch(fetchWeatherByCords(loc, 1));
+          dispatch(fetchWeatherByCity('London', 1));
+          console.log('onUseEffectFetching')
+        })
+        .catch(error => console.error(error));
+  }, []);
 
   return (
     <Container>
@@ -47,7 +49,10 @@ const Home: FC = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollView}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => onRefresh}
+            />
           }>
           {data.isLoaded ? (
             <Carousel elements={data.cities} />

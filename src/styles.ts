@@ -22,16 +22,22 @@ export const CONTAINER = {
   marginHorizontal: 10,
 };
 export const PRIMARY_CL = {
-  color: '#FFFFFF',
+  color: '#F2F3FF',
 };
 export const SECONDARY_CL = {
-  color: '#C0C0C0',
+  color: '#D2D3FF',
 };
 export const PRIMARY_BG_CL_ONE = {
-  backgroundColor: '#3a6ea5',
+  backgroundColor: '#8880FF',
 };
 export const PRIMARY_BG_CL_TWO = {
-  backgroundColor: '#004e98',
+  backgroundColor: '#3412C5',
+};
+export const SECONDARY_BG_CL_ONE = {
+  backgroundColor: '#887EF8'
+};
+export const SECONDARY_BG_CL_TWO = {
+  backgroundColor: '#6048DB'
 };
 export const DEFAULT_SIZE = {
   fontSize: 16
