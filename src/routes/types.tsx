@@ -5,6 +5,7 @@ import { CompositeScreenProps } from '@react-navigation/native';
 export type RootStackParamList = {
   Home: undefined;
   AddCityWeather: undefined;
+  WeatherScreen: undefined;
   PostDetails: { id: string };
   NotFound: undefined;
 };

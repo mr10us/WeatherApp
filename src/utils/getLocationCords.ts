@@ -5,7 +5,7 @@ export default async function getLocationCords(input: string) {
 
   try {
     const response: AxiosResponse = await axios.get(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${formattedInput}&limit=5&appid=${process.env.API_KEY}`,
+      `https://api.openweathermap.org/geo/1.0/direct?q=${formattedInput}&limit=5&appid=${process.env.API_KEY}`, // up to 5 responds(
     );
 
     return response.data;

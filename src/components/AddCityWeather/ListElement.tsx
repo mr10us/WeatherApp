@@ -33,6 +33,7 @@ const ListElement: FC<ListElement> = ({locationData}) => {
 export default ListElement;
 const styles = StyleSheet.create({
   container: {
+    height: 60,
     width: '100%',
     padding: 15,
     flexDirection: 'row',

@@ -44,7 +44,7 @@ const Carousel: FC<{elements: ICityWeather[]}> = ({elements}) => {
               cityName={elem.city.name}
               weather={elem.list[0].weather.main}
               temperature={elem.list[0].main}
-              index={index}
+              dt={elem.list[0].dt}
             />
           ))}
         </ScrollView>

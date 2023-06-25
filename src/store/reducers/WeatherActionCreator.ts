@@ -21,12 +21,11 @@ export const fetchWeatherByCity =
   };
 
 export const fetchWeatherByCords =
-  (loc: number[], cnt: number) =>
-  async (dispatch: AppDispatch) => {
+  ({cords, cnt}: ICords) => async (dispatch: AppDispatch) => {
     try {
       dispatch(weatherSlice.actions.weatherFetching());
       const response = await axios.get<ICityWeather>(
-        `https://api.openweathermap.org/data/2.5/forecast?appid=${process.env.API_KEY}&lat=${loc[0]}&lon=${loc[1]}&cnt=${cnt}&units=metric`,
+        `https://api.openweathermap.org/data/2.5/forecast?appid=${process.env.API_KEY}&lat=${cords.lat}&lon=${cords.lon}&cnt=${cnt}&units=metric`,
       );
 
       const weather: ICityWeather = parseData(response.data);

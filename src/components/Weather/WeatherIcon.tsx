@@ -3,17 +3,18 @@ import {StyleSheet, View, Text, Image} from 'react-native';
 import {useAppSelector} from '../../hooks';
 import {selectIcon} from '../../store/reducers/WeatherSlice';
 
-interface WeatherIconProps {
-  arrayIndex: number;
+type WeatherIconProps =  {
+  dt: number;
 }
 
-const WeatherIcon: FC<WeatherIconProps> = ({arrayIndex}) => {
-  const icon = useAppSelector(state => selectIcon(state, arrayIndex));
+const WeatherIcon: FC<WeatherIconProps> = ({dt}) => {
+  const icon = useAppSelector(state => selectIcon(state, dt));
 
   return (
     <View style={styles.weatherIconContainer}>
       <Image
         style={styles.weatherIcon}
+        //check for null icon
         source={{uri: `https://openweathermap.org/img/wn/${icon}@4x.png`}}
       />
     </View>

@@ -7,6 +7,7 @@ const AppRouter = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
+      //, animation: 'none'
       screenOptions={{headerTransparent: true}}>
       {routes.map(item => (
         <Stack.Screen

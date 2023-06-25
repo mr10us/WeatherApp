@@ -2,10 +2,7 @@ import {FC, useState, useCallback, useEffect} from 'react';
 import {StyleSheet, ScrollView, RefreshControl, View} from 'react-native';
 import Header from '../components/Header';
 import {useAppSelector, useAppDispatch} from '../hooks';
-import {
-  fetchWeatherByCity,
-  fetchWeatherByCords,
-} from '../store/reducers/WeatherActionCreator';
+import {fetchWeatherByCords} from '../store/reducers/WeatherActionCreator';
 import getCurrentLocationCords from '../utils/getCurrentLocationCords';
 import Carousel from '../components/Carousel';
 import Loader from '../components/Loader';
@@ -21,24 +18,34 @@ const Home: FC = () => {
     setRefreshing(true);
     getCurrentLocationCords()
       .then(loc => {
-        dispatch(fetchWeatherByCords(loc, 1));
+        dispatch(
+          fetchWeatherByCords({
+            cords: {lat: loc.cords.lat, lon: loc.cords.lon},
+            cnt: 1,
+          }),
+        );
         setRefreshing(false);
-        console.log('onRefreshFetching')
+        console.log('onRefreshFetching');
       })
       .catch(error => {
         setRefreshing(false);
+        console.log(error);
       });
-  }, [dispatch]);
+  }, [dispatch, refreshing]);
 
   useEffect(() => {
-    if (data)
+    if (data.cities.length === 0)
       getCurrentLocationCords()
         .then(loc => {
-          dispatch(fetchWeatherByCords(loc, 1));
-          dispatch(fetchWeatherByCity('London', 1));
-          console.log('onUseEffectFetching')
+          dispatch(
+            fetchWeatherByCords({
+              cords: {lat: loc.cords.lat, lon: loc.cords.lon},
+              cnt: 1,
+            }),
+          );
+          console.log('onUseEffectFetching');
         })
-        .catch(error => console.error(error));
+        .catch(error => console.log(error));
   }, []);
 
   return (
@@ -51,7 +58,7 @@ const Home: FC = () => {
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
-              onRefresh={() => onRefresh}
+              onRefresh={onRefresh}
             />
           }>
           {data.isLoaded ? (

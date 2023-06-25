@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { PRIMARY_CL } from '../../styles';
 
-interface WeatherTempProps {
+type WeatherTempProps = {
   temp: number;
   tempMax: number;
   tempMin: number;

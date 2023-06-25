@@ -3,34 +3,29 @@ import WeatherInfo from './WeatherInfo';
 import {FC} from 'react';
 import WeatherCityName from './WeatherCityName';
 import WeatherContainer from './WeatherContainer';
+import { ITemp } from '../../interfaces/ICityWeather';
 
 type WeatherCardData = {
   cityName: string;
   weather: string;
-  temperature: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-  };
-  index: number;
+  temperature: ITemp;
+  dt: number;
 };
 
 const WeatherCard: FC<WeatherCardData> = ({
   cityName,
   weather,
   temperature,
-  index,
+  dt,
 }) => {
+
   return (
-    <WeatherContainer>
+    <WeatherContainer dt={dt}>
       <View style={styles.weatherCard}>
         <WeatherCityName cityName={cityName} />
         <WeatherInfo
-          index={index}
-          temp={temperature.temp}
-          tempMax={temperature.temp_max}
-          tempMin={temperature.temp_min}
+          dt={dt}
+          temperature={temperature}
           weather={weather}
         />
       </View>

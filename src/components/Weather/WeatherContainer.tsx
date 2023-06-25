@@ -1,12 +1,36 @@
-import {PropsWithChildren} from 'react';
-import {View, StyleSheet} from 'react-native';
-import { WIDTH } from '../../consts';
+import {FC, PropsWithChildren} from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import {WIDTH} from '../../consts';
+import {useNavigation} from '@react-navigation/native';
+import {useAppDispatch} from '../../hooks';
+import {weatherSlice} from '../../store/reducers/WeatherSlice';
 
+type WeatherContainer = {
+  dt?: number;
+};
 
-export default function WeatherContainer(props: PropsWithChildren) {
-  return <View style={styles.container}>{props.children}</View>;
-}
+const WeatherContainer: FC<PropsWithChildren<WeatherContainer>> = ({
+  children,
+  dt,
+}) => {
+  const {navigate} = useNavigation();
+  const dispatch = useAppDispatch();
 
+  return (
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        if (dt) {
+          dispatch(weatherSlice.actions.toggleActive(dt));
+          navigate('WeatherScreen');
+        }
+      }}>
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+export default WeatherContainer;
 const styles = StyleSheet.create({
   container: {
     width: WIDTH,

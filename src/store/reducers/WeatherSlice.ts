@@ -41,15 +41,39 @@ export const weatherSlice = createSlice({
       state.isLoaded = true;
       state.error = action.payload;
     },
+    toggleActive(state, action: PayloadAction<number>) {
+      const dtToToggle = action.payload;
+      const index = state.cities.findIndex(
+        item => item.list[0].dt === dtToToggle,
+      );
+
+      if (index !== -1) {
+        state.cities[index].active = !state.cities[index].active;
+      }
+    },
   },
 });
 
 export default weatherSlice.reducer;
 
-export const selectIcon = (state: RootState, arrayIndex: number) => {
+export const selectIcon = (state: RootState, dt: number) => {
   try {
-    return state.weatherReducer.cities[arrayIndex].list[0].weather.icon;
+    const index = state.weatherReducer.cities.findIndex(
+      item => item.list[0].dt === dt,
+    );
+    if (index === -1) return null;
+
+    return state.weatherReducer.cities[index].list[0].weather.icon;
   } catch (error) {
     return null;
   }
+};
+
+export const selectActive = (state: RootState) => {
+  const activeIndex = state.weatherReducer.cities.findIndex(
+    value => (value.active = true),
+  );
+
+  if (activeIndex == -1) throw new Error('No data found');
+  return state.weatherReducer.cities[activeIndex];
 };

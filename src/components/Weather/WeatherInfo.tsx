@@ -2,27 +2,31 @@ import {View, StyleSheet} from 'react-native';
 import WeatherIcon from './WeatherIcon';
 import WeatherTemp from './WeatherTemp';
 import {FC} from 'react';
+import { ITemp } from '../../interfaces/ICityWeather';
 
 type WeatherInfoData = {
-  index: number;
-  temp: number;
-  tempMax: number;
-  tempMin: number;
-  weather: string;
+  dt: number;
+  temperature: ITemp;
+  weather: string
+
 };
 
 const WeatherInfo: FC<WeatherInfoData> = ({
-  index,
-  temp,
-  tempMax,
-  tempMin,
+  dt,
+  temperature,
   weather,
 }) => {
   return (
-    <View style={styles.weatherInfo}>
+    <View>
       <View>
-        <WeatherIcon arrayIndex={index} />
-        <WeatherTemp temp={temp} tempMax={tempMax} tempMin={tempMin} weather={weather} />
+        <WeatherIcon dt={dt} />
+        <WeatherTemp
+          temp={temperature.temp}
+          tempMax={temperature.temp_max}
+          tempMin={temperature.temp_min}
+          weather={weather}
+        />
+        
       </View>
     </View>
   );
@@ -30,8 +34,4 @@ const WeatherInfo: FC<WeatherInfoData> = ({
 
 export default WeatherInfo;
 
-const styles = StyleSheet.create({
-  weatherInfo: {
-    height: '90%',
-  },
-});
+const styles = StyleSheet.create({});
